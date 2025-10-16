@@ -454,13 +454,13 @@
 
 (define-private (insert-into-leaderboard (volunteer principal) (score uint) (season uint) (rank uint))
   (let ((leaderboard-size-val (var-get leaderboard-size)))
-    (if (> rank leaderboard-size-val)
+    (if (or (> rank leaderboard-size-val) (> rank u10))
       (ok false)
       (match (get-leaderboard-entry rank)
         existing-entry
           (if (> score (get total-score existing-entry))
             (begin
-              (try! (shift-leaderboard-down rank))
+              ;; Simple insertion - just replace current position
               (map-set volunteer-leaderboard
                 { rank: rank }
                 {
@@ -472,7 +472,10 @@
               )
               (ok true)
             )
-            (insert-into-leaderboard volunteer score season (+ rank u1))
+            (if (and (< (+ rank u1) leaderboard-size-val) (< rank u5))
+              (insert-into-leaderboard volunteer score season (+ rank u1))
+              (ok false)
+            )
           )
         (begin
           (map-set volunteer-leaderboard
@@ -497,7 +500,7 @@
       (ok true)
       (match (get-leaderboard-entry from-rank)
         entry (begin
-                (try! (shift-leaderboard-down (+ from-rank u1)))
+                ;; Only shift if we're not at the bottom
                 (if (< (+ from-rank u1) leaderboard-size-val)
                   (map-set volunteer-leaderboard
                     { rank: (+ from-rank u1) }
@@ -622,14 +625,19 @@
 )
 
 (define-private (clear-leaderboard (rank uint))
-  (let ((leaderboard-size-val (var-get leaderboard-size)))
-    (if (> rank leaderboard-size-val)
-      (ok true)
-      (begin
-        (map-delete volunteer-leaderboard { rank: rank })
-        (clear-leaderboard (+ rank u1))
-      )
-    )
+  (begin
+    ;; Clear positions 1-10 manually to avoid recursion
+    (map-delete volunteer-leaderboard { rank: u1 })
+    (map-delete volunteer-leaderboard { rank: u2 })
+    (map-delete volunteer-leaderboard { rank: u3 })
+    (map-delete volunteer-leaderboard { rank: u4 })
+    (map-delete volunteer-leaderboard { rank: u5 })
+    (map-delete volunteer-leaderboard { rank: u6 })
+    (map-delete volunteer-leaderboard { rank: u7 })
+    (map-delete volunteer-leaderboard { rank: u8 })
+    (map-delete volunteer-leaderboard { rank: u9 })
+    (map-delete volunteer-leaderboard { rank: u10 })
+    (ok true)
   )
 )
 

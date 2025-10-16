@@ -2,17 +2,17 @@
 name = "simnet"
 
 [accounts.deployer]
-mnemonic = "test test test test test test test test test test test junk"
+mnemonic = "twice kind fence tip hidden tilt action fragile skin nothing glory cousin green tomorrow spring wrist shed math olympic multiply hip blue scout claw"
 balance = 100000000000000
 
 [accounts.wallet_1] 
-mnemonic = "test test test test test test test test test test test junk"
+mnemonic = "sell invite acquire kitten bamboo drastic jelly vivid peace spawn twice guilt pave pen trash pretty park cube fragile unaware remain midnight betray rebuild"
 balance = 100000000000000
 
 [accounts.wallet_2]
-mnemonic = "test test test test test test test test test test test junk"
+mnemonic = "hold excess usual excess ring elephant install account glad dry fragile donkey gaze humble truck breeze nation gasp vacuum limb head keep delay hospital"
 balance = 100000000000000
 
 [accounts.wallet_3]
-mnemonic = "test test test test test test test test test test test junk"
+mnemonic = "cycle puppy glare enroll cost improve round trend wrist mushroom prime depot decade fly honey flame fence gravity surge grocery course spike nation obvious"
 balance = 100000000000000
