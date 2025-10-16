@@ -1,0 +1,20 @@
+[network]
+name = "devnet"
+node_rpc_address = "http://localhost:20443"
+deployment_fee_rate = 10
+
+[accounts.deployer]
+mnemonic = "test test test test test test test test test test test junk"
+balance = 100000000000000
+
+[accounts.wallet_1]
+mnemonic = "test test test test test test test test test test test junk"
+balance = 100000000000000
+
+[accounts.wallet_2]
+mnemonic = "test test test test test test test test test test test junk"
+balance = 100000000000000
+
+[accounts.wallet_3]
+mnemonic = "test test test test test test test test test test test junk"
+balance = 100000000000000
