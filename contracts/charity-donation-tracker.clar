@@ -447,49 +447,35 @@
 ;; NEW LEADERBOARD FUNCTIONS
 (define-public (update-leaderboard-position (volunteer principal) (score uint))
   (let ((current-season (var-get season-number)))
-    (try! (insert-into-leaderboard volunteer score current-season u1))
+    ;; Simple placement at rank 1 (top of leaderboard)
+    (map-set volunteer-leaderboard
+      { rank: u1 }
+      {
+        volunteer: volunteer,
+        total-score: score,
+        season: current-season,
+        last-updated: stacks-block-height
+      }
+    )
     (ok true)
   )
 )
 
 (define-private (insert-into-leaderboard (volunteer principal) (score uint) (season uint) (rank uint))
-  (let ((leaderboard-size-val (var-get leaderboard-size)))
-    (if (or (> rank leaderboard-size-val) (> rank u10))
-      (ok false)
-      (match (get-leaderboard-entry rank)
-        existing-entry
-          (if (> score (get total-score existing-entry))
-            (begin
-              ;; Simple insertion - just replace current position
-              (map-set volunteer-leaderboard
-                { rank: rank }
-                {
-                  volunteer: volunteer,
-                  total-score: score,
-                  season: season,
-                  last-updated: stacks-block-height
-                }
-              )
-              (ok true)
-            )
-            (if (and (< (+ rank u1) leaderboard-size-val) (< rank u5))
-              (insert-into-leaderboard volunteer score season (+ rank u1))
-              (ok false)
-            )
-          )
-        (begin
-          (map-set volunteer-leaderboard
-            { rank: rank }
-            {
-              volunteer: volunteer,
-              total-score: score,
-              season: season,
-              last-updated: stacks-block-height
-            }
-          )
-          (ok true)
-        )
+  ;; Simple non-recursive insertion at specified rank
+  (if (> rank u10)
+    (ok false)
+    (begin
+      (map-set volunteer-leaderboard
+        { rank: rank }
+        {
+          volunteer: volunteer,
+          total-score: score,
+          season: season,
+          last-updated: stacks-block-height
+        }
       )
+      (ok true)
     )
   )
 )

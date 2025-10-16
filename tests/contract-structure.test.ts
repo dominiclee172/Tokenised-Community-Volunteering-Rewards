@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 describe("Contract Structure Tests", () => {
-  const contractPath = join(process.cwd(), "contracts", "Tokenised-Community-Volunteering-Rewards.clar");
+  const contractPath = join(process.cwd(), "contracts", "charity-donation-tracker.clar");
   const contractContent = readFileSync(contractPath, "utf-8");
 
   it("contains required leaderboard functions", () => {

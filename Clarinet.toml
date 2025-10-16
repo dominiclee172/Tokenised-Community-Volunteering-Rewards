@@ -6,8 +6,8 @@ telemetry = true
 cache_dir = '.\.cache'
 requirements = []
 
-[contracts.Tokenised-Community-Volunteering-Rewards]
-path = 'contracts/Tokenised-Community-Volunteering-Rewards.clar'
+[contracts.charity-donation-tracker]
+path = 'contracts/charity-donation-tracker.clar'
 clarity_version = 3
 epoch = 3.1
 
