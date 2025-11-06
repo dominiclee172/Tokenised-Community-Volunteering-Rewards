@@ -20,6 +20,11 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
+[contracts.volunteer-badge-nft]
+path = 'contracts/volunteer-badge-nft.clar'
+clarity_version = 3
+epoch = 3.1
+
 [repl.remote_data]
 enabled = false
 api_url = 'https://api.hiro.so'

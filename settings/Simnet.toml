@@ -1,7 +1,0 @@
-[network]
-name = "simnet"
-rpc_url = "http://localhost:20443"
-
-[accounts.deployer]
-mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
-balance = 1000000000000
